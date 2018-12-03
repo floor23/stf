@@ -21,7 +21,8 @@ RUN mkdir -p /app && \
 USER stf-build
 
 # Run the build.
-RUN set -x && \
+RUN npm install --global smart-npm@1 --registry=https://registry.npm.taobao.org/ && \
+    set -x && \
     cd /tmp/build && \
     export PATH=$PWD/node_modules/.bin:$PATH && \
     npm install --loglevel http && \
