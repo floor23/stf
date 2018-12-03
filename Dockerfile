@@ -21,8 +21,7 @@ RUN mkdir -p /app && \
 USER stf-build
 
 # Run the build.
-RUN sudo npm install --global smart-npm@1 --registry=https://registry.npm.taobao.org/ && \
-    set -x && \
+RUN set -x && \
     cd /tmp/build && \
     export PATH=$PWD/node_modules/.bin:$PATH && \
     npm install --loglevel http && \
@@ -31,7 +30,7 @@ RUN sudo npm install --global smart-npm@1 --registry=https://registry.npm.taobao
     bower cache clean && \
     npm prune --production && \
     mv node_modules /app && \
-    npm cache clean && \
+    npm cache clean --force && \
     rm -rf ~/.node-gyp && \
     cd /app && \
     rm -rf /tmp/*
