@@ -17,8 +17,8 @@
             button(type='button', ng-model='showScreen', uib-btn-checkbox).btn.btn-xs.btn-info
               i(ng-show='showScreen', uib-tooltip='{{"Hide Screen"|translate}}', tooltip-placement='bottom').fa.fa-eye
               i(ng-show='!showScreen', uib-tooltip='{{"Show Screen"|translate}}', tooltip-placement='bottom').fa.fa-eye-slash
-            button(type='button', ng-click='kickDevice(device); $event.stopPropagation()', uib-tooltip='{{"Stop Using"|translate}}', tooltip-placement='bottom').btn.btn-sm.btn-danger-outline
-              i.fa.fa-times
+            //- button(type='button', ng-click='kickDevice(device); $event.stopPropagation()', uib-tooltip='{{"Stop Using"|translate}}', tooltip-placement='bottom').btn.btn-sm.btn-danger-outline
+            //-   i.fa.fa-times
 
           .device-name-container.pull-left(uib-dropdown)
             a.stf-vnc-device-name.pointer.unselectable(uib-dropdown-toggle)
