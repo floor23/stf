@@ -30,7 +30,7 @@ RUN set -x && \
     bower cache clean && \
     npm prune --production && \
     mv node_modules /app && \
-    npm cache verify && \
+    npm cache clean && \
     rm -rf ~/.node-gyp && \
     cd /app && \
     rm -rf /tmp/*
