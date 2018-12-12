@@ -136,10 +136,10 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
   $scope.$on('onUnload', function (e) {
       try {
         if ($scope.device) {
-          alert($scope.device.serial)
-          GroupService.kick($scope.device, true).then(function () {
+          var result = GroupService.kick($scope.device, true).then(function () {
             $scope.$digest()
           })
+          console.log(result)
       } else {
         alert('no device to release')
       }
