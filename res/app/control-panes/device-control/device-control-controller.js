@@ -137,7 +137,7 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
       try {
         if ($scope.device) {
           alert($scope.device.serial)
-          GroupService.kick($scope.device).then(function () {
+          GroupService.kick($scope.device, true).then(function () {
             $scope.$digest()
           })
       } else {
