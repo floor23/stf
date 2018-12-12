@@ -1,7 +1,7 @@
 var _ = require('lodash')
 
 module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
-  $location, $timeout, $window, $rootScope) {
+  $location, $timeout, $window, $rootScope, $http) {
 
   $scope.showScreen = true
 
@@ -136,13 +136,18 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
   $scope.$on('onUnload', function (e) {
       try {
         if ($scope.device) {
-          var result = GroupService.kick($scope.device, true).then(function () {
+          GroupService.kick($scope.device, true).then(function () {
             $scope.$digest()
           })
-          console.log(result)
-          setTimeout(() => {
-            console.log(new Date())
-          }, 2000);
+        $http({
+            method: 'DELETE',
+            url: '/api/v1/user/devices/' + $scope.device.serial
+        })
+        .then(function(response) {
+            console.log(response.data);
+        }, function(rejection) {
+            console.log(rejection.data);
+        });
       } else {
         alert('no device to release')
       }
