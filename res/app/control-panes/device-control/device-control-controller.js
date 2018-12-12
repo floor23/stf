@@ -138,7 +138,8 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
     e.preventDefault();
   })
   $scope.$on('onUnload', function (e) {
-    confirmation.message = "onUnload.";
+    var message = confirm('close cur tab?');
+    confirmation.message = message;
     e.preventDefault();
   })
 }
