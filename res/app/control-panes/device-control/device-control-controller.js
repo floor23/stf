@@ -133,17 +133,18 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
     }
   }
 
-  $scope.$on('onBeforeUnload', function (e, confirmation) {
-    confirmation.message = "onBeforeUnload.";
-    e.preventDefault();
-  })
   $scope.$on('onUnload', function (e) {
-    var message = confirm('close cur device?' + $scope.device.serial);
-    confirmation.message = message;
     try {
-      GroupService.kick($scope.device).then(function () {
-        $scope.$digest()
-      })
+      if ($scope.device) {
+        var message = confirm('close cur device?' + $scope.device.serial);
+        confirmation.message = message;
+        GroupService.kick($scope.device).then(function () {
+          $scope.$digest()
+        })
+      } else {
+        var message = confirm('close cur tab?');
+        confirmation.message = message;
+      }
     } catch (e) {
       alert(e.message)
     }
