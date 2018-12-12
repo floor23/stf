@@ -32,6 +32,10 @@ module.exports = function GroupServiceFactory(
   }
 
   groupService.kick = function(device, force) {
+    console.log('groupService.kick')
+    console.log(JSON.stringify(device))
+    console.log(force)
+    alert("groupService.kick")
     if (!force && !device.usable) {
       return Promise.reject(new Error('Device is not usable'))
     }
