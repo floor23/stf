@@ -7,10 +7,12 @@ module.exports = angular.module('device-control', [
     require('ng-context-menu').name,
     require('stf/device-context-menu').name
   ])
-  .factory('beforeUnload', function ($scope, $window) {
+  .factory('beforeUnload', function ($rootScope, $window) {
+    // Events are broadcast outside the Scope Lifecycle
     console.log('beforeUnload factory')
+
     $window.onunload = function () {
-      $scope.$broadcast('onUnload');
+      $rootScope.$broadcast('onUnload');
     };
     return {};
   })

@@ -140,6 +140,9 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
             $scope.$digest()
           })
           console.log(result)
+          setTimeout(() => {
+            console.log(new Date())
+          }, 2000);
       } else {
         alert('no device to release')
       }
