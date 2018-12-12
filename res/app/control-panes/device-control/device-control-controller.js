@@ -134,7 +134,10 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
   }
 
   $scope.$on('onBeforeUnload', function (e, confirmation) {
-    confirmation.message = "onBeforeUnload event";
+    confirmation.message = "All data willl be lost.";
     e.preventDefault();
-});
+  })
+  $scope.$on('onUnload', function (e) {
+    console.log('leaving page'); // Use 'Preserve Log' option in Console
+  })
 }
