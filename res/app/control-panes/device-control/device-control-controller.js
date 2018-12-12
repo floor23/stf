@@ -135,9 +135,20 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
 
   $scope.$on('$locationChangeStart', function (event) {
     var answer = confirm("Are you sure you want to leave this page?")
-    if (!answer) {
-      event.preventDefault();
-    }
+    console.log('confirm result: ' + answer)
+    event.preventDefault();
   });
 
+  window.onbeforeunload = function (event) {
+    var message = 'close cur tab?';
+    console.log('in event: ' + JSON.stringify(event))
+    if (typeof event == 'undefined') {
+      event = window.event;
+    }
+    console.log('new event: ' + JSON.stringify(event))
+    if (event) {
+      event.returnValue = message;
+    }
+    return message;
+  }
 }
