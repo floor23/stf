@@ -17,3 +17,17 @@ module.exports = angular.module('device-control', [
   }])
   .controller('DeviceControlCtrl', require('./device-control-controller'))
   .directive('deviceControlKey', require('./device-control-key-directive'))
+  .factory('beforeUnload', function ($rootScope, $window) {
+    // Events are broadcast outside the Scope Lifecycle
+    $window.onbeforeunload = function (e) {
+        var confirmation = {message:"broadcast onBeforeUnload"};
+        var event = $rootScope.$broadcast('onBeforeUnload', confirmation);
+        if (event.defaultPrevented) {
+            return confirmation.message;
+        }
+    };
+    return {};
+})
+.run(function (beforeUnload) {
+    // Must invoke the service at least once
+})

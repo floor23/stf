@@ -133,22 +133,8 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
     }
   }
 
-  // $scope.$on('$locationChangeStart', function (event) {
-  //   var answer = confirm("leave this page?")
-  //   console.log('confirm result: ' + answer)
-  //   event.preventDefault();
-  // });
-
-  $scope.$on('$destroy', function (event) {
-    var message = confirm('close cur tab?');
-    console.log('in event: ' + JSON.stringify(event))
-    if (typeof event == 'undefined') {
-      event = window.event;
-    }
-    console.log('new event: ' + JSON.stringify(event))
-    if (event) {
-      event.returnValue = message;
-    }
-    return message;
-  });
+  $scope.$on('onBeforeUnload', function (e, confirmation) {
+    confirmation.message = "onBeforeUnload event";
+    e.preventDefault();
+});
 }
