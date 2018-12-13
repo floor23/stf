@@ -51,6 +51,15 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
   }
 
   $scope.controlDevice = function (device) {
+    $http({
+        method: 'DELETE',
+        url: '/api/v1/user/devices/' + device.serial
+      })
+      .then(function (response) {
+        console.log(response.data);
+      }, function (rejection) {
+        console.log(rejection.data);
+      });
     $location.path('/control/' + device.serial)
   }
 
@@ -134,20 +143,22 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
   }
 
   $scope.$on('onUnload', function (e) {
-      try {
-        if ($scope.device) {
-          GroupService.kick($scope.device, true).then(function () {
-            $scope.$digest()
-          })
+    try {
+      if ($scope.device) {
+        $window.alert($scope.device.serial);
+        GroupService.kick($scope.device, true).then(function () {
+          $scope.$digest()
+        })
         $http({
             method: 'DELETE',
             url: '/api/v1/user/devices/' + $scope.device.serial
-        })
-        .then(function(response) {
+          })
+          .then(function (response) {
             console.log(response.data);
-        }, function(rejection) {
+            $window.alert($scope.device.serial + 'Already released!');
+          }, function (rejection) {
             console.log(rejection.data);
-        });
+          });
       } else {
         alert('no device to release')
       }
