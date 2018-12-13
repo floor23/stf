@@ -9,8 +9,11 @@ module.exports = angular.module('device-control', [
   ])
   .factory('beforeUnload', function ($rootScope, $window) {
     // Events are broadcast outside the Scope Lifecycle
-    console.log('beforeUnload factory')
-
+    console.log('onbeforeunload factory')
+    $window.onbeforeunload = function (evt) {
+      $rootScope.$broadcast('onBeforeUnload');
+    }
+    console.log('onunload factory')
     $window.onunload = function () {
       $rootScope.$broadcast('onUnload');
     };

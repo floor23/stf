@@ -51,15 +51,7 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
   }
 
   $scope.controlDevice = function (device) {
-    $http({
-        method: 'DELETE',
-        url: '/api/v1/user/devices/' + device.serial
-      })
-      .then(function (response) {
-        console.log(response.data);
-      }, function (rejection) {
-        console.log(rejection.data);
-      });
+    $window.alert('控制' + device.serial)
     $location.path('/control/' + device.serial)
   }
 
@@ -142,6 +134,13 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
     }
   }
 
+  $scope.$on('onBeforeUnload', function (e) {
+    if ($scope.device) {
+      $window.alert($scope.device.serial);
+    }
+    return "确定退出"
+  })
+
   $scope.$on('onUnload', function (e) {
     try {
       if ($scope.device) {
@@ -165,5 +164,6 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
     } catch (e) {
       alert(e.message)
     }
+    return "确定关闭"
   })
 }
