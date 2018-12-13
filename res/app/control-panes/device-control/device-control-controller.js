@@ -138,7 +138,7 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
     if ($scope.device) {
       $window.alert($scope.device.serial);
     }
-    return "确定退出"
+    return "onBeforeUnload"
   })
 
   $scope.$on('onUnload', function (e) {
@@ -164,6 +164,6 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
     } catch (e) {
       alert(e.message)
     }
-    return "确定关闭"
+    return "onUnload"
   })
 }
