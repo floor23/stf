@@ -133,7 +133,8 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
     }
   }
 
-  $scope.$on('load', function (e, confirmation) {
+  $scope.$on('$viewContentLoaded', function (e, confirmation) {
+    console.log('viewContentLoaded')
     $window.alert('alert load')
   })
 }
