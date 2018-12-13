@@ -133,12 +133,13 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
     }
   }
 
-  $scope.$on('$viewContentLoaded', function (e) {
-    console.log('viewContentLoaded')
-    $window.alert('alert load')
-  })
-
   $scope.$watch('$viewContentLoaded', function () {
     alert("blah");
   });
+
+  $scope.onExit = function () {
+    return ('bye bye');
+  };
+
+  $window.onbeforeunload = $scope.onExit;
 }
