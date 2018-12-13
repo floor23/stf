@@ -143,19 +143,19 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
     try {
       if ($scope.device) {
         $window.alert($scope.device.serial);
-        GroupService.kick($scope.device, true).then(function () {
-          $scope.$digest()
-        })
-        $http({
-            method: 'DELETE',
-            url: '/api/v1/user/devices/' + $scope.device.serial
-          })
-          .then(function (response) {
-            console.log(response.data);
-            $window.alert($scope.device.serial + 'Already released!');
-          }, function (rejection) {
-            console.log(rejection.data);
-          });
+        // GroupService.kick($scope.device, true).then(function () {
+        //   $scope.$digest()
+        // })
+        // $http({
+        //     method: 'DELETE',
+        //     url: '/api/v1/user/devices/' + $scope.device.serial
+        //   })
+        //   .then(function (response) {
+        //     console.log(response.data);
+        //     $window.alert($scope.device.serial + 'Already released!');
+        //   }, function (rejection) {
+        //     console.log(rejection.data);
+        //   });
       } else {
         alert('no device to release')
       }
