@@ -133,4 +133,7 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
     }
   }
 
+  $scope.$on('load', function (e, confirmation) {
+    $window.alert('alert load')
+  })
 }
