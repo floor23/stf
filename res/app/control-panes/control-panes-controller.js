@@ -88,7 +88,7 @@ module.exports =
       
       if (newValue !== oldValue) {
         if (oldValue === 'using') {
-          $location.path('/')
+          GroupService.kick($scope.device, true)
           // FatalMessageService.open($scope.device, false)
         }
       }

@@ -133,28 +133,4 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
       $window.resizeTo($window.outerHeight, $window.outerWidth)
     }
   }
-
-  $scope.$watch('$viewContentLoaded', function () {
-    var serial = $window.location.href.split('/')[5]
-    $http.get('/api/v1/devices/' + serial)
-    .then(function(response) {
-      var device = response.data.device
-      if (device && device.using === true) {
-        // $http({
-        //     method: 'DELETE',
-        //     url: '/api/v1/user/devices/' + serial
-        //   })
-        //   .then(function (response) {
-        //     console.log(response.data);
-        //   }, function (rejection) {
-        //     console.log(rejection.data);
-        //   });
-
-        GroupService.kick(device, true).catch(function(e) {
-          alert($filter('translate')(gettext('Device cannot get kicked from the group')))
-          throw new Error(e)
-        })
-      }
-    })
-  });
 }
