@@ -2,42 +2,43 @@ module.exports = function EnhanceDeviceServiceFactory($filter, AppState) {
   var service = {}
 
   function setState(data) {
+    data.state = 'unauthorized'
     // For convenience, formulate an aggregate state property that covers
     // every possible state.
-    data.state = 'absent'
-    if (data.present) {
-      data.state = 'present'
-      switch (data.status) {
-        case 1:
-          data.state = 'offline'
-          break
-        case 2:
-          data.state = 'unauthorized'
-          break
-        case 3:
-          data.state = 'preparing'
-          if (data.ready) {
-            data.state = 'ready'
-            if (data.using) {
-              if (data.usage === 'automation') {
-                data.state = 'automation'
-              }
-              else {
-                data.state = 'using'
-              }
-            }
-            else {
-              if (data.owner) {
-                data.state = 'busy'
-              }
-              else {
-                data.state = 'available'
-              }
-            }
-          }
-          break
-      }
-    }
+    // data.state = 'absent'
+    // if (data.present) {
+    //   data.state = 'present'
+    //   switch (data.status) {
+    //     case 1:
+    //       data.state = 'offline'
+    //       break
+    //     case 2:
+    //       data.state = 'unauthorized'
+    //       break
+    //     case 3:
+    //       data.state = 'preparing'
+    //       if (data.ready) {
+    //         data.state = 'ready'
+    //         if (data.using) {
+    //           if (data.usage === 'automation') {
+    //             data.state = 'automation'
+    //           }
+    //           else {
+    //             data.state = 'using'
+    //           }
+    //         }
+    //         else {
+    //           if (data.owner) {
+    //             data.state = 'busy'
+    //           }
+    //           else {
+    //             data.state = 'available'
+    //           }
+    //         }
+    //       }
+    //       break
+    //   }
+    // }
   }
 
   function enhanceDevice(device) {
