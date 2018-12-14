@@ -140,8 +140,9 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
     .then(function(response) {
       var device = response.data.device
       if (device) {
+        device.usable = true
         GroupService.invite(device).catch(function(e) {
-          alert($filter('translate')(gettext('Device cannot get kicked from the group')))
+          alert(e.message)
           throw new Error(e)
         })
       }
