@@ -2,10 +2,9 @@ module.exports = function EnhanceDeviceServiceFactory($filter, AppState) {
   var service = {}
 
   function setState(data) {
-    data.state = 'unauthorized'
     // For convenience, formulate an aggregate state property that covers
     // every possible state.
-    // data.state = 'absent'
+    data.state = 'absent'
     // if (data.present) {
     //   data.state = 'present'
     //   switch (data.status) {
