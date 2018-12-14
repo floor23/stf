@@ -84,11 +84,13 @@ module.exports =
     getDevice($routeParams.serial)
 
     $scope.$watch('device.state', function(newValue, oldValue) {
-      if (newValue !== oldValue) {
-        if (oldValue === 'using') {
-          FatalMessageService.open($scope.device, false)
-        }
-      }
+      console.log('mobile state change from ' + oldValue + ' to ' + newValue)
+      $location.path('/')
+      // if (newValue !== oldValue) {
+      //   if (oldValue === 'using') {
+      //     FatalMessageService.open($scope.device, false)
+      //   }
+      // }
     }, true)
 
   }
