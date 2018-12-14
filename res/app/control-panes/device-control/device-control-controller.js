@@ -133,4 +133,18 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
       $window.resizeTo($window.outerHeight, $window.outerWidth)
     }
   }
+
+  $scope.$watch('$viewContentLoaded', function () {
+    var serial = $window.location.href.split('/')[5]
+    $http.get('/api/v1/devices/' + serial)
+    .then(function(response) {
+      var device = response.data.device
+      if (device) {
+        GroupService.invite(device).catch(function(e) {
+          alert($filter('translate')(gettext('Device cannot get kicked from the group')))
+          throw new Error(e)
+        })
+      }
+    })
+  });
 }
