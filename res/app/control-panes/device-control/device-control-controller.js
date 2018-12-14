@@ -136,14 +136,17 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
 
   $scope.$watch('$viewContentLoaded', function () {
     var serial = $window.location.href.split('/')[5]
-    $http({
-        method: 'DELETE',
-        url: '/api/v1/user/devices/' + serial
-      })
-      .then(function (response) {
-        console.log(response.data);
-      }, function (rejection) {
-        console.log(rejection.data);
-      });
+    var device = DeviceService.load(serial)
+    if (device && device.using === true) {
+      $http({
+          method: 'DELETE',
+          url: '/api/v1/user/devices/' + serial
+        })
+        .then(function (response) {
+          console.log(response.data);
+        }, function (rejection) {
+          console.log(rejection.data);
+        });
+    }
   });
 }
