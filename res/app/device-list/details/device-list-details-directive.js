@@ -519,6 +519,7 @@ module.exports = function DeviceListDetailsDirective(
 
       // Triggers when the tracker sees a device for the first time.
       function addListener(device) {
+        console.log('found device: ' + JSON.stringify(device))
         var row = createRow(device)
         filterRow(row, device)
         insertRow(row, device)

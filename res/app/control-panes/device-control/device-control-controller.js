@@ -135,21 +135,6 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
   }
 
   $scope.$watch('$viewContentLoaded', function () {
-    console.log(JSON.stringify(!$window.location.href))
-    console.log(JSON.stringify(!$scope.device))
-    $http({
-        method: 'post',
-        url: 'http://booster.58.com/manage/user/remoteAuth',
-        params: {
-          user: 'zhaojiangbing',
-          sn: $scope.device ? $scope.device.serial : "0"
-        }
-      })
-      .then(function (response) {
-        console.log(response.data);
-      }, function (rejection) {
-        console.log(rejection.data);
-      });
-    alert("blah");
+    console.log($window.location.href)
   });
 }
