@@ -273,6 +273,7 @@ module.exports = function DeviceListDetailsDirective(
 
       // Checks whether the device matches the currently active filters.
       function match(device) {
+        console.log(JSON.stringify(device.owner))
         for (var i = 0, l = activeFilters.length; i < l; ++i) {
           var filter = activeFilters[i]
           var column

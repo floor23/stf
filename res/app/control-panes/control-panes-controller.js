@@ -86,7 +86,7 @@ module.exports =
     $scope.$watch('device.state', function(newValue, oldValue) {
       if (newValue !== oldValue) {
         if (oldValue === 'using') {
-          $location.path('/')
+          $window.location.assign('/');
           // FatalMessageService.open($scope.device, false)
         }
       }

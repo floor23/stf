@@ -1,6 +1,6 @@
 var _ = require('lodash')
 
-module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
+module.exports = function DeviceControlCtrl($scope, UserService, DeviceService, GroupService,
   $location, $timeout, $window, $rootScope, $http) {
 
   $scope.showScreen = true
@@ -137,6 +137,8 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
   $scope.$watch('$viewContentLoaded', function () {
     $rootScope.adminMode = true
     var serial = $window.location.href.split('/')[5]
+    console.log('current user: ' + UserService.currentUser)
+    console.log('current device: ' + serial)
     $http.get('/api/v1/devices/' + serial)
       .then(function (response) {
         var device = response.data.device
