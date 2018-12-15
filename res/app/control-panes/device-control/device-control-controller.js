@@ -135,43 +135,19 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
   }
 
   $scope.$watch('$viewContentLoaded', function () {
+    alert(1)
+    window.onunload = function () {
+      alert(2)
+    }
+
+    $window.onunload = function () {
+      alert(3)
+    }
     var serial = $window.location.href.split('/')[5]
     $http.get('/api/v1/devices/' + serial)
       .then(function (response) {
         var device = response.data.device
         console.log('load device: ' + JSON.stringify(device))
       })
-  })
-
-  $scope.$on('onBeforeUnload', function (e) {
-    console.log('onBeforeUnload trigured')
-    if ($scope.device) {
-      $window.alert($scope.device.serial);
-    }
-  })
-
-  $scope.$on('onUnload', function (e) {
-    try {
-      if ($scope.device) {
-        $window.alert($scope.device.serial);
-        // GroupService.kick($scope.device, true).then(function () {
-        //   $scope.$digest()
-        // })
-        // $http({
-        //     method: 'DELETE',
-        //     url: '/api/v1/user/devices/' + $scope.device.serial
-        //   })
-        //   .then(function (response) {
-        //     console.log(response.data);
-        //     $window.alert($scope.device.serial + 'Already released!');
-        //   }, function (rejection) {
-        //     console.log(rejection.data);
-        //   });
-      } else {
-        alert('no device to release')
-      }
-    } catch (e) {
-      alert(e.message)
-    }
   })
 }
