@@ -36,8 +36,8 @@
                       img(ng-src='/static/app/devices/icon/x24/{{ groupDevice.image || "E30HT.jpg" }}')
                     span(ng-class='{"current-device": groupDevice.serial === device.serial }') {{ groupDevice.enhancedName }}
 
-                  //- .pull-right(ng-click='kickDevice(groupDevice); $event.stopPropagation()').kick-device
-                  //-   i.fa.fa-times
+                  .pull-right(ng-click='kickDevice(groupDevice); $event.stopPropagation()').kick-device
+                    i.fa.fa-times
                   .clearfix
 
       .as-row.fill-height

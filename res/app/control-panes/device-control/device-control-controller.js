@@ -135,14 +135,6 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
   }
 
   $scope.$watch('$viewContentLoaded', function () {
-    alert(1)
-    window.onunload = function () {
-      alert(2)
-    }
-
-    $window.onunload = function () {
-      alert(3)
-    }
     var serial = $window.location.href.split('/')[5]
     $http.get('/api/v1/devices/' + serial)
       .then(function (response) {
