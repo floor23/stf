@@ -6,6 +6,7 @@ module.exports = function DeviceListDetailsDirective(
 , $rootScope
 , gettext
 , DeviceColumnService
+, UserService
 , GroupService
 , DeviceService
 , LightboxImageService
@@ -274,6 +275,7 @@ module.exports = function DeviceListDetailsDirective(
       // Checks whether the device matches the currently active filters.
       function match(device) {
         console.log(JSON.stringify(device.owner))
+        console.log('current user: ' + JSON.stringify(UserService.currentUser))
         for (var i = 0, l = activeFilters.length; i < l; ++i) {
           var filter = activeFilters[i]
           var column
