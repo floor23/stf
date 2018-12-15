@@ -3,8 +3,7 @@ module.exports =
     $timeout, $location, DeviceService, GroupService, ControlService,
     StorageService, FatalMessageService, SettingsService) {
 
-    var sharedTabs = [
-      {
+    var sharedTabs = [{
         title: gettext('Screenshots'),
         icon: 'fa-camera color-skyblue',
         templateUrl: 'control-panes/screenshots/screenshots.pug',
@@ -36,23 +35,19 @@ module.exports =
       }
     ]
 
-    $scope.topTabs = [
-      {
-        title: gettext('Dashboard'),
-        icon: 'fa-dashboard fa-fw color-pink',
-        templateUrl: 'control-panes/dashboard/dashboard.pug',
-        filters: ['native', 'web']
-      }
-    ].concat(angular.copy(sharedTabs))
+    $scope.topTabs = [{
+      title: gettext('Dashboard'),
+      icon: 'fa-dashboard fa-fw color-pink',
+      templateUrl: 'control-panes/dashboard/dashboard.pug',
+      filters: ['native', 'web']
+    }].concat(angular.copy(sharedTabs))
 
-    $scope.belowTabs = [
-      {
-        title: gettext('Logs'),
-        icon: 'fa-list-alt color-red',
-        templateUrl: 'control-panes/logs/logs.pug',
-        filters: ['native', 'web']
-      }
-    ].concat(angular.copy(sharedTabs))
+    $scope.belowTabs = [{
+      title: gettext('Logs'),
+      icon: 'fa-list-alt color-red',
+      templateUrl: 'control-panes/logs/logs.pug',
+      filters: ['native', 'web']
+    }].concat(angular.copy(sharedTabs))
 
     $scope.device = null
     $scope.control = null
@@ -60,10 +55,10 @@ module.exports =
     // TODO: Move this out to Ctrl.resolve
     function getDevice(serial) {
       DeviceService.get(serial, $scope)
-        .then(function(device) {
+        .then(function (device) {
           return GroupService.invite(device)
         })
-        .then(function(device) {
+        .then(function (device) {
           $scope.device = device
           $scope.control = ControlService.create(device, device.channel)
 
@@ -74,8 +69,8 @@ module.exports =
 
           return device
         })
-        .catch(function() {
-          $timeout(function() {
+        .catch(function () {
+          $timeout(function () {
             $location.path('/')
           })
         })
@@ -83,11 +78,12 @@ module.exports =
 
     getDevice($routeParams.serial)
 
-    $scope.$watch('device.state', function(newValue, oldValue) {
+    $scope.$watch('device.state', function (newValue, oldValue) {
       if (newValue !== oldValue) {
         if (oldValue === 'using') {
-          $location.path('/')
-          $scope.$apply()
+          $scope.$apply(function () {
+            window.location.href = '/'
+          })
           // FatalMessageService.open($scope.device, false)
         }
       }
