@@ -135,6 +135,7 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
   }
 
   $scope.$watch('$viewContentLoaded', function () {
+    $rootScope.adminMode = true
     var serial = $window.location.href.split('/')[5]
     $http.get('/api/v1/devices/' + serial)
       .then(function (response) {

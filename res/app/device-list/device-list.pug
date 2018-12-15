@@ -39,7 +39,7 @@
                       span(ng-bind='"Reset"|translate')
 
           uib-tabset.overflow-auto.device-list-active-tabs(ng-if='activeTabs')
-            uib-tab(active='activeTabs.icons', select='focusSearch()')
+            uib-tab(active='activeTabs.icons', select='focusSearch()', ng-if='!$root.basicMode')
               uib-tab-heading
                 i.fa.fa-th-large
                 span(translate) Devices
@@ -47,7 +47,7 @@
 
                 //- device-list-icons(tracker='tracker', columns='columns', sort='sort', filter='filter')
 
-            uib-tab(active='activeTabs.details', select='focusSearch()', ng-if='!$root.basicMode')
+            uib-tab(active='activeTabs.details', select='focusSearch()')
               uib-tab-heading
                 i.fa.fa-list
                 span(translate) Details
