@@ -81,7 +81,7 @@ module.exports =
     $scope.$watch('device.state', function (newValue, oldValue) {
       if (newValue !== oldValue) {
         if (oldValue === 'using') {
-          $scope.$apply(function () {
+          $timeout(function() {
             window.location.href = '/'
           })
           // FatalMessageService.open($scope.device, false)
