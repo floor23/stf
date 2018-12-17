@@ -1,7 +1,7 @@
 var _ = require('lodash')
 
 module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
-  $location, $timeout, $window, $rootScope) {
+  $location, $timeout, $window, $rootScope, $http) {
 
   $scope.showScreen = true
 
