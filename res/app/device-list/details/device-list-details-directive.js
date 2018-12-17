@@ -284,7 +284,10 @@ module.exports = function DeviceListDetailsDirective(
           }
         } else {
           var ctrlDevice = $rootScope.ctrlDevice
-          if (ctrlDevice && (device.serial != ctrlDevice)) {
+          if (!ctrlDevice) {
+            return false
+          }
+          if (device.serial != ctrlDevice) {
             return false
           }
         }

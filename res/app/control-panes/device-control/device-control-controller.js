@@ -1,7 +1,7 @@
 var _ = require('lodash')
 
-module.exports = function DeviceControlCtrl($scope, UserService, DeviceService, GroupService,
-  $location, $timeout, $window, $rootScope, $http) {
+module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
+  $location, $timeout, $window, $rootScope) {
 
   $scope.showScreen = true
 
@@ -135,17 +135,10 @@ module.exports = function DeviceControlCtrl($scope, UserService, DeviceService, 
   }
 
   $scope.$watch('$viewContentLoaded', function () {
+    var serial = $window.location.href.split('/')[5]
     //默认为管理员，这样可以踢掉其他人占用的设备
     $rootScope.adminMode = true
     //设置当前的控制手机，用于过滤设备列表中的设备
     $rootScope.ctrlDevice = serial
-    var serial = $window.location.href.split('/')[5]
-    console.log('current user: ' + JSON.stringify(UserService.currentUser))
-    console.log('current device: ' + serial)
-    $http.get('/api/v1/devices/' + serial)
-      .then(function (response) {
-        var device = response.data.device
-        console.log('load device: ' + JSON.stringify(device))
-      })
   })
 }
