@@ -285,7 +285,7 @@ module.exports = function DeviceListDetailsDirective(
         } else {
           //设备被其他人占用，在这里弹窗提示
           if (ctrlDevice === device.serial) {
-            alert('设备被其他人占用: ' + deviceOwner)
+            alert('设备被其他人占用: ' + deviceOwner ? deviceOwner.name : '未知用户')
           }
         }
         for (var i = 0, l = activeFilters.length; i < l; ++i) {
