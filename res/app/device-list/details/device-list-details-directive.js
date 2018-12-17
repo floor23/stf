@@ -276,6 +276,18 @@ module.exports = function DeviceListDetailsDirective(
       function match(device) {
         console.log('current owner: ' + JSON.stringify(device.owner))
         console.log('current user: ' + JSON.stringify(UserService.currentUser))
+        var deviceOwner = device.owner
+        var curUser = UserService.currentUser
+        if (deviceOwner) {
+          if (deviceOwner.name != curUser.name || deviceOwner.email != curUser.email) {
+            return false
+          }
+        } else {
+          var ctrlDevice = $rootScope.ctrlDevice
+          if (ctrlDevice && (device.serial != ctrlDevice)) {
+            return false
+          }
+        }
         for (var i = 0, l = activeFilters.length; i < l; ++i) {
           var filter = activeFilters[i]
           var column
@@ -522,7 +534,6 @@ module.exports = function DeviceListDetailsDirective(
 
       // Triggers when the tracker sees a device for the first time.
       function addListener(device) {
-        console.log('found device: ' + JSON.stringify(device))
         var row = createRow(device)
         filterRow(row, device)
         insertRow(row, device)
