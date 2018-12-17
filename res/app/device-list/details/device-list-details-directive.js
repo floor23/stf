@@ -282,11 +282,6 @@ module.exports = function DeviceListDetailsDirective(
           if (device.serial != ctrlDevice) {
             return false
           }
-        } else {
-          //设备被其他人占用，在这里弹窗提示
-          if (ctrlDevice === device.serial) {
-            alert('Device is using by ' + deviceOwner ? deviceOwner.name : 'unknown user')
-          }
         }
         for (var i = 0, l = activeFilters.length; i < l; ++i) {
           var filter = activeFilters[i]
