@@ -274,13 +274,18 @@ module.exports = function DeviceListDetailsDirective(
       // Checks whether the device matches the currently active filters.
       function match(device) {
         var deviceOwner = device.owner
+        var ctrlDevice = $rootScope.ctrlDevice
         if (!deviceOwner) {
-          var ctrlDevice = $rootScope.ctrlDevice
           if (!ctrlDevice) {
             return false
           }
           if (device.serial != ctrlDevice) {
             return false
+          }
+        } else {
+          //设备被其他人占用，在这里弹窗提示
+          if (ctrlDevice === device.serial) {
+            alert('设备被其他人占用: ' + device.Owner.name)
           }
         }
         for (var i = 0, l = activeFilters.length; i < l; ++i) {
