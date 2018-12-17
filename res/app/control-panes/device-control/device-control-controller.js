@@ -140,5 +140,16 @@ module.exports = function DeviceControlCtrl($scope, DeviceService, GroupService,
     $rootScope.adminMode = true
     //设置当前的控制手机，用于过滤设备列表中的设备
     $rootScope.ctrlDevice = serial
+    //如果当前设备被占用，则调到列表页
+    $http.get('/api/v1/devices/' + serial)
+    .then(function(response) {
+      var device = response.data.device
+      if (device && device.using === true) {
+        $timeout(function() {
+          window.location.href = '/'
+        })
+      }
+    })
+    
   })
 }
